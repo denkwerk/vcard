@@ -1,7 +1,7 @@
 {
-    "name": "jeroendesloovere/vcard",
+    "name": "denkwerk/vcard",
     "type": "library",
-    "description": "This VCard PHP class can generate a vCard with some data. When using an iOS device it will export as a .ics file because iOS devices don't support the default .vcf files.",
+    "description": "This package ist forked from jeroendesloovere/vcard (https://github.com/jeroendesloovere/vcard). This VCard PHP class can generate a vCard with some data. When using an iOS device it will export as a .ics file because iOS devices don't support the default .vcf files.",
     "keywords": ["vcard", "generator", ".vcf", "php"],
     "homepage": "https://github.com/jeroendesloovere/vcard",
     "license": "MIT",
@@ -10,6 +10,10 @@
             "name": "Jeroen Desloovere",
             "email": "info@jeroendesloovere.be",
             "homepage": "http://jeroendesloovere.be",
+            "role": "Developer"
+        },
+        {
+            "name": "André Laugks",
             "role": "Developer"
         }
     ],
