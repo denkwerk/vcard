@@ -701,7 +701,7 @@ class VCard
      * @param  string $value
      * @return void
      */
-    private function setProperty($element, $key, $value)
+    protected function setProperty($element, $key, $value)
     {
         if (!in_array($element, $this->multiplePropertiesForElementAllowed)
             && isset($this->definedElements[$element])
