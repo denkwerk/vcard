@@ -435,13 +435,14 @@ class VCard
 
     /**
      * Download a vcard or vcal file to the browser.
+     * @param bool $addContentLength
      */
-    public function download()
+    public function download($addContentLength = true)
     {
         // define output
         $output = $this->getOutput();
 
-        foreach ($this->getHeaders(false) as $header) {
+        foreach ($this->getHeaders(false, $addContentLength) as $header) {
             header($header);
         }
 
@@ -537,17 +538,25 @@ class VCard
      * Get headers
      *
      * @param  bool  $asAssociative
+     * @param  bool  $addContentLength
      * @return array
      */
-    public function getHeaders($asAssociative)
+    public function getHeaders($asAssociative, $addContentLength = true)
     {
         $contentType        = $this->getContentType() . '; charset=' . $this->getCharset();
         $contentDisposition = 'attachment; filename=' . $this->getFilename() . '.' . $this->getFileExtension();
         $contentLength      = strlen($this->getOutput());
         $connection         = 'close';
 
+        $headers = array(
+            'Content-type: ' . $contentType,
+            'Content-Disposition: ' . $contentDisposition,
+            'Content-Length: ' . $contentLength,
+            'Connection: ' . $connection,
+        );
+
         if ((bool) $asAssociative) {
-            return array(
+            $headers = array(
                 'Content-type'        => $contentType,
                 'Content-Disposition' => $contentDisposition,
                 'Content-Length'      => $contentLength,
@@ -555,12 +564,11 @@ class VCard
             );
         }
 
-        return array(
-            'Content-type: ' . $contentType,
-            'Content-Disposition: ' . $contentDisposition,
-            'Content-Length: ' . $contentLength,
-            'Connection: ' . $connection,
-        );
+        if (false === $addContentLength) {
+            unset($headers[2]);
+        }
+
+        return $headers;
     }
 
     /**
